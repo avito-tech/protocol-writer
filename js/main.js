@@ -27,7 +27,7 @@ new Vue({
             clearTimeout(this.timeOut);
             this.timeOut = setTimeout(() => {
                 localStorage.setItem('protocol-log', JSON.stringify(this.log));
-            }, 1000)
+            }, 1000);
         },
         append() {
             this.log = this.log.concat([newLogItem()]);
@@ -38,9 +38,14 @@ new Vue({
             }, 100);
         },
         copy() {
-            copyToClipboard(this.log.map(({ date, text }) => {
-                return `${this.formatDate(date)} - ${text}`
-            }).join('\n'));
+            copyToClipboard(
+                this.log
+                    .filter(({ text }) => Boolean(text))
+                    .map(({ date, text }) => {
+                        return `${this.formatDate(date)} - ${text}`;
+                    })
+                    .join('\n')
+            );
         },
         clear() {
             this.log = [newLogItem()];
@@ -50,7 +55,9 @@ new Vue({
     template: '#user',
     data() {
         return {
-            log: JSON.parse(localStorage.getItem('protocol-log')) || [newLogItem()],
+            log: JSON.parse(localStorage.getItem('protocol-log')) || [
+                newLogItem()
+            ],
             timeOut: null
         };
     },
