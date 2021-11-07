@@ -20,6 +20,11 @@ new Vue({
     el: '#app',
     mounted() {},
     methods: {
+        removeLine() {
+            const text = event.target.parentNode.parentNode.querySelector('input').value || null;
+            this.log = this.log.filter(singleItem => singleItem.text != text);
+            this.persist();
+        },
         formatDate(date) {
             return fecha.format(new Date(date), 'HH:mm:ss');
         },

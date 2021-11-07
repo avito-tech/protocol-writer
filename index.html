@@ -39,6 +39,9 @@
                             <div class="column">
                                 <input type="text" v-model="logItem.text" @keyup.enter="append"/>
                             </div>
+                            <div class="colum">
+                                <button v-if="log.length > 1" @click="removeLine">x</button>
+                            </div>
                         </li>
                     </ul>
                     <div class="row">
