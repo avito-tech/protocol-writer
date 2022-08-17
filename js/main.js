@@ -53,8 +53,10 @@ new Vue({
             );
         },
         clear() {
-            this.log = [newLogItem()];
-            this.persist();
+            if (confirm("Realy clear?")) {
+                this.log = [newLogItem()];
+                this.persist();
+            }
         }
     },
     template: '#user',
