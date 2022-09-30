@@ -30,7 +30,11 @@
         <div class="container">
             <div class="row">
                 <div class="column">
-                    <h1>Protocol</h1>
+                    <h1>
+                        Protocol
+                        <button v-if="!isDark" @click="toggleTheme">Dark theme</button>
+                        <button v-if="isDark" @click="toggleTheme">Bright theme</button>
+                    </h1>
                     <ul>
                         <li v-for="logItem in log" class="row">
                             <div class="colum">
