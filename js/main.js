@@ -18,7 +18,11 @@ function newLogItem() {
 
 new Vue({
     el: '#app',
-    mounted() {},
+    mounted() {
+        if (this.isDark) {
+            document.body.classList.add("dark-theme")
+        }
+    },
     methods: {
         removeLine() {
             const text = event.target.parentNode.parentNode.querySelector('input').value || null;
@@ -53,10 +57,15 @@ new Vue({
             );
         },
         clear() {
-            if (confirm("Realy clear?")) {
-                this.log = [newLogItem()];
-                this.persist();
-            }
+            this.log = [newLogItem()];
+            this.persist();
+        },
+        toggleTheme() {
+            this.isDark = !this.isDark
+            this.isDark
+                ? localStorage.setItem('dark-theme', '1')
+                : localStorage.removeItem('dark-theme')
+            document.body.classList.toggle("dark-theme")
         }
     },
     template: '#user',
@@ -65,7 +74,8 @@ new Vue({
             log: JSON.parse(localStorage.getItem('protocol-log')) || [
                 newLogItem()
             ],
-            timeOut: null
+            timeOut: null,
+            isDark:  localStorage.getItem('dark-theme') !== null
         };
     },
     computed: {}
