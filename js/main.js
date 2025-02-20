@@ -39,6 +39,8 @@ new Vue({
             }, 1000);
         },
         append() {
+            // set actual record time for last item
+            this.log[this.log.length-1].date = new Date();
             this.log = this.log.concat([newLogItem()]);
             this.persist();
             setTimeout(() => {
