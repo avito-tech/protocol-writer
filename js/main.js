@@ -57,8 +57,10 @@ new Vue({
             );
         },
         clear() {
-            this.log = [newLogItem()];
-            this.persist();
+            if (confirm("Clear the log?")) {
+                this.log = [newLogItem()];
+                this.persist();
+            }
         },
         toggleTheme() {
             this.isDark = !this.isDark
