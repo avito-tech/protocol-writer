@@ -22,6 +22,10 @@ new Vue({
         if (this.isDark) {
             document.body.classList.add("dark-theme")
         }
+        // set actual record time for last item
+        setInterval(() => {
+            this.log[this.log.length-1].date = new Date();
+        }, 1000)
     },
     methods: {
         removeLine() {
